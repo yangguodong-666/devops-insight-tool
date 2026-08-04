@@ -1,0 +1,6 @@
+jenkins:
+  url: http://192.168.26.128:8080/
+  user: admin
+  token: 11690098c902d9e607561f9b2e5b545327
+  jobs:
+    - devops-demo

@@ -1,0 +1,5 @@
+servers:
+  - ip: 192.168.26.128
+    user: root
+    password: "123456"
+    name: web-prod-01
