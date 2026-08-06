@@ -9,3 +9,5 @@ A lightweight DevOps inspection and reporting tool built with Python.
 - Designed for multilingual teams (EN / CN / ES compatible)
 
 ## Quick Start
+
+## Test CICD
