@@ -13,5 +13,3 @@ A lightweight DevOps inspection and reporting tool built with Python.
 ## Test CICD
 
 ## Test Ngrok
-
-## Add Secret
