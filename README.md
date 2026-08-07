@@ -10,4 +10,4 @@ A lightweight DevOps inspection and reporting tool built with Python.
 
 ## Quick Start
 
-## Test CICD For Jenkins
+## Test CICD
