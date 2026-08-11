@@ -2,7 +2,7 @@ name: Day16 CI/CD Pipeline
 
 on:
   push:
-    branches: [main, "feature"]
+    branches: [main, "feature/**"]
   pull_request:
     branches: [main]
   
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up python
-        uses: actions/python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install flake8
@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up python
-        uses: actions@python@v5
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Run test script
@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker image
-        run:
+        run: |
           docker build -t devops-insight-tool:${{ github.sha }} .
           docker tag devops-insight-tool:${{ github.sha }} devops-insight-tool:latest
       - name: Save image info
@@ -59,7 +59,7 @@ jobs:
         with:
           name: image-info
       - name: Deploy 
-        run:
+        run: |
           IMAGE = $(cat image_info.txt)
           echo "Deploying $IMAGE to production"
           echo "Deployment successful"
