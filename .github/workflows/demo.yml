@@ -10,3 +10,13 @@ jobs:
       run: echo "Hello from GitHub Actions!"
     - name: Sleep for demo
       run: sleep 10
+
+
+# 字段	作用	示例
+# name	工作流名称	name: CI
+# on	触发事件	on: [push, pull_request]
+# jobs	任务集合	jobs:
+# runs-on	运行环境	runs-on: ubuntu-latest
+# steps	步骤列表	steps:
+# uses	使用现成 Action	uses: actions/checkout@v4
+# run	执行 shell 命令	run: echo hello

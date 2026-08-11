@@ -56,3 +56,12 @@ Thumbs.db
 .coverage
 htmlcov/
 .pytest_cache/
+
+# 为什么忽略 venv/ / .venv/？
+# 在项目中忽略了虚拟环境目录，因为它与操作系统强相关，且体积庞大，不应进入版本控制
+
+# 为什么忽略 config/jenkins.yaml
+# “Jenkins Token 属于敏感凭据，我通过 .gitignore 防止其意外提交，并在 README 中说明通过环境变量注入配置
+
+# 为什么保留 reports/.gitkeep
+# 希望仓库结构完整，但不保存历史报告文件，因此使用 .gitkeep 占位，同时忽略具体报告内容
