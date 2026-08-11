@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build Docker image
-        run:
+        run: |
           docker build -t devops-insight-tool:${{ github.sha }} .
           docker tag devops-insight-tool:${{ github.sha }} devops-insight-tool:latest
       - name: Save image info
@@ -59,7 +59,7 @@ jobs:
         with:
           name: image-info
       - name: Deploy 
-        run:
+        run: |
           IMAGE = $(cat image_info.txt)
           echo "Deploying $IMAGE to production"
           echo "Deployment successful"
