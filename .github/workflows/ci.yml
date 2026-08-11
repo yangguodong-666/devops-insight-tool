@@ -1,8 +1,8 @@
-name: Day15 CI Pipeline
+name: Day16 CI/CD Pipeline
 
 on:
   push:
-    branches: [main, "feature/**"]
+    branches: [main, "feature"]
   pull_request:
     branches: [main]
   
@@ -11,22 +11,56 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up python
+        uses: actions/python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
       - name: Install flake8
         run: pip install flake8
       - name: Run lint
-        run: flake8 scripts/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        run: flake8. --count --select=E9,F63,F7,F82 --show-source --statistics
         continue-on-error: true
+  
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up python
+        uses: actions@python@v5
         with:
           python-version: "3.12"
       - name: Run test script
         run: python scripts/hello_ci.py
+  
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run:
+          docker build -t devops-insight-tool:${{ github.sha }} .
+          docker tag devops-insight-tool:${{ github.sha }} devops-insight-tool:latest
+      - name: Save image info
+        run: echo "devops-insight-tool:${{ github.sha }}" > image_info.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-info
+          path: image_info.txt
+  
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    if: github.ref == 'refs/head/main'
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: image-info
+      - name: Deploy 
+        run:
+          IMAGE = $(cat image_info.txt)
+          echo "Deploying $IMAGE to production"
+          echo "Deployment successful"
+
