@@ -14,4 +14,4 @@ A lightweight DevOps inspection and reporting tool built with Python.
 
 ## test # Day15 completed
 
-## Test day18 github push trigger Jenkins
+## Test Day18 github push trigger Jenkins
